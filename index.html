@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | Giva Violen Pardede</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/devicon.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { 
+                        dark:"#0D1117", 
+                        card:"#161B22", 
+                        neonBlue:"#7BC9FF", 
+                        neonPurple:"#8576FF",
+                        /* Overriding HTML utility classes directly */
+                        cyan: { 400: '#A3FFD6', 500: '#7BC9FF' },
+                        violet: { 400: '#7BC9FF', 500: '#8576FF', 600: '#6458BF' },
+                        orange: { 400: '#A3FFD6' },
+                        yellow: { 400: '#A3FFD6' },
+                        red: { 400: '#A3FFD6' },
+                        green: { 400: '#A3FFD6' },
+                        blue: { 300: '#7BC9FF', 400: '#7BC9FF' },
+                        slate: { 700: '#161B22', 900: '#0D1117' }
+                    },
+                    fontFamily: { sans: ['Inter','sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+.timeline-dot {
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:10px;
+    z-index:2;
+    overflow:hidden;
+    border:3px solid #7BC9FF;
+    padding:6px;
+    box-sizing:border-box;
+    box-shadow:none;
+}
+.dark .timeline-dot { background: #0D1117; }
+.light .timeline-dot { background: #F4F7FA; }
+
+        .timeline-logo-full{
+            width:100%;
+            height:100%;
+            object-fit:contain;
+        }
+
+        #mobileScrollTop{
+            display:none;
+        }
+
+        #mobileScrollTop.show{
+            display:flex;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Inter',sans-serif; overflow-x:hidden; transition:background .3s,color .3s; }
+
+        .dark body { background:#0D1117; color:#E5E7EB; }
+        .light body { background:#F4F7FA; color:#1E293B; }
+
+        ::selection { background:#8576FF; color:white; }
+
+        /* HERO BG */
+        .hero-bg {
+            position:relative; overflow:hidden;
+            background: radial-gradient(circle at top right,rgba(121,63,223,.18),transparent 25%),
+                        radial-gradient(circle at bottom left,rgba(112,145,245,.15),transparent 25%), #0D1117;
+        }
+        .light .hero-bg {
+            background: radial-gradient(circle at top right,rgba(121,63,223,.10),transparent 25%),
+                        radial-gradient(circle at bottom left,rgba(112,145,245,.08),transparent 25%), #F4F7FA;
+        }
+
+        .hero-bg::before {
+            content:""; position:absolute; inset:0;
+            background-image: linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+                              linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+            background-size:40px 40px; pointer-events:none;
+        }
+        .light .hero-bg::before {
+            background-image: linear-gradient(rgba(0,0,0,.03) 1px,transparent 1px),
+                              linear-gradient(90deg,rgba(0,0,0,.03) 1px,transparent 1px);
+        }
+
+        .text-gradient { background:linear-gradient(to right,#7BC9FF,#8576FF); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.animated-gradient-name{
+    background: linear-gradient(
+        90deg,
+        #8576FF 0%,
+        #7BC9FF 25%,
+        #A3FFD6 50%,
+        #9996C2 75%,
+        #8576FF 100%
+    );
+
+    background-size: 300% 100%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    display: inline-block;
+
+    animation: gradientFlow 4s linear infinite;
+
+    white-space: nowrap;
+}
+
+@keyframes gradientFlow{
+    100%{
+        background-position: 0% center;
+    }
+
+    0%{
+        background-position: 300% center;
+    }
+}
+
+        /* NAVBAR */
+        .navbar { backdrop-filter:blur(12px); background:rgba(13,17,23,.75); border-bottom:1px solid rgba(255,255,255,.04); transition:background .3s; }
+        .light .navbar { background:rgba(255,255,255,.85); border-bottom:1px solid rgba(0,0,0,.04); }
+        .dark .nav-link { color:#d1d5db; }
+        .dark .nav-link:hover { color:#A3FFD6; }
+        .light .nav-link { color:#475569; }
+        .light .nav-link:hover { color:#8576FF; }
+        .nav-item{
+            position: relative;
+            padding-bottom: 6px;
+            transition: all .3s ease;
+        }
+
+.nav-item.active{
+    color:#A3FFD6 !important;
+    font-weight:700;
+}
+.light .nav-item.active{
+    color:#1C1678 !important;
+}
+
+.nav-item.active::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:3px;
+    background:#A3FFD6;
+    border-radius:999px;
+}
+.light .nav-item.active::after{
+    background:#1C1678;
+}
+
+        .btn-gradient { transition:.3s; }
+        .dark .btn-gradient { background:#A3FFD6; color:#1C1678; }
+        .light .btn-gradient { background:#1C1678; color:#A3FFD6; }
+        .btn-gradient:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(163,255,214,.25); }
+        .light .btn-gradient:hover { box-shadow:0 10px 30px rgba(28,22,120,.25); }
+
+        /* DARK/LIGHT TOGGLE */
+        .theme-toggle-wrap {
+            display:flex; align-items:center; gap:10px;
+        }
+        .theme-icon { font-size:1.1rem; transition:.3s; }
+.dark .theme-icon-sun { color:#64748b; }
+.dark .theme-icon-moon { color:#A3FFD6; }
+.light .theme-icon-sun { color:#FFA12E; }
+.light .theme-icon-moon { color:#64748b; }
+
+        /* TOGGLE SWITCH */
+        .toggle-switch {
+            position:relative; width:52px; height:28px; cursor:pointer;
+            background:#8576FF; border-radius:999px; transition:background .3s;
+            border:none; outline:none; flex-shrink:0;
+        }
+        .dark .toggle-switch { background:#8576FF; }
+        .toggle-switch::after {
+            content:""; position:absolute; top:3px; left:3px;
+            width:22px; height:22px; border-radius:50%; background:white;
+            transition:transform .3s; box-shadow:0 2px 6px rgba(0,0,0,.3);
+        }
+        .toggle-switch.dark-active::after { transform:translateX(24px); background:white; }
+        .dark .toggle-switch { background:#8576FF; }
+
+        /* LANGUAGE BUTTON */
+        .lang-trigger {
+            display:flex; align-items:center; gap:6px; cursor:pointer;
+            padding:6px 12px; border-radius:8px; border:none;
+            background:rgba(255,255,255,.05); color:#e2e8f0;
+            font-weight:700; font-size:.85rem; transition:.2s;
+        }
+        .light .lang-trigger { background:rgba(0,0,0,.04); color:#374151; }
+        .lang-trigger:hover { background:rgba(123,201,255,.15); }
+
+        /* LANG MODAL */
+        #langModal {
+            position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:99999;
+            display:flex; align-items:flex-start; justify-content:flex-end;
+            padding-top:70px; padding-right:24px;
+            opacity:0; pointer-events:none; transition:.25s;
+        }
+        #langModal.open { opacity:1; pointer-events:all; }
+        .lang-modal-box {
+            background:white; border-radius:20px; padding:24px 22px; min-width:300px;
+            box-shadow:0 20px 60px rgba(0,0,0,.35); transform:translateY(-10px); transition:.25s;
+        }
+        #langModal.open .lang-modal-box { transform:translateY(0); }
+        .dark .lang-modal-box { background:#161B22; border:1px solid rgba(255,255,255,.05); }
+        .lang-modal-config { font-size:.68rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#8576FF; text-align:center; margin-bottom:4px; }
+        .lang-modal-title { font-size:1rem; font-weight:800; text-align:center; margin-bottom:18px; }
+        .dark .lang-modal-title { color:white; }
+        .light .lang-modal-title { color:#0f172a; }
+
+        .lang-option {
+            display:flex; align-items:center; gap:12px; padding:14px 16px;
+            border-radius:12px; cursor:pointer; transition:.2s; margin-bottom:8px;
+            border:2px solid transparent; background:#f4f7fa;
+        }
+        .dark .lang-option { background:#1D232D; }        .lang-option:last-child { margin-bottom:0; }
+        .lang-option:hover { border-color:rgba(123,201,255,.4); }
+        .lang-option.selected { border-color:transparent; }
+        .dark .lang-option.selected { background:#A3FFD6; }
+        .light .lang-option.selected { background:#1C1678; }
+        .lang-badge {
+            width:34px; height:34px; border-radius:8px; font-size:.72rem; font-weight:800;
+            display:flex; align-items:center; justify-content:center;
+            background:rgba(255,255,255,.2); color:white; flex-shrink:0;
+        }
+        .lang-option:not(.selected) .lang-badge { background:rgba(0,0,0,.05); color:#475569; }
+        .dark .lang-option:not(.selected) .lang-badge { background:rgba(255,255,255,.05); color:#e2e8f0; }
+        .lang-label { font-weight:700; font-size:.95rem; }
+        .dark .lang-option.selected .lang-label,
+        .dark .lang-option.selected .lang-check,
+        .dark .lang-option.selected .lang-badge { color:#1C1678; }
+        .light .lang-option.selected .lang-label,
+        .light .lang-option.selected .lang-check { color:#A3FFD6; }
+        .lang-option:not(.selected) .lang-label { color:#334155; }
+        .dark .lang-option:not(.selected) .lang-label { color:#e2e8f0; }
+        .lang-check { margin-left:auto; color:white; display:none; }
+
+        [data-lang-inline] { display:none; }
+        [data-lang-inline].visible { display:inline; }
+
+        /* CARDS */
+        .skill-card { border-radius:24px; transition:.3s; backdrop-filter:blur(10px); background:rgba(22,27,34,.65); border:1px solid rgba(255,255,255,.04); }
+        .light .skill-card { background:white; border:1px solid rgba(0,0,0,.04); box-shadow:0 4px 20px rgba(0,0,0,.04); }
+        .skill-card:hover { transform:translateY(-8px); border-color:rgba(123,201,255,.45); box-shadow:0 20px 40px rgba(123,201,255,.15); }
+
+        .project-card { position:relative; border-radius:24px; overflow:hidden; transition:.35s; background:rgba(22,27,34,.7); border:3px solid; border-color: #4d6476; backdrop-filter:blur(10px); }
+        .light .project-card { background:white; border-color: #e8ecef;/*border:1px solid rgba(0,0,0,.04); box-shadow:0 4px 20px rgba(0,0,0,.04); border-color: #4d6476; */}
+        .dark .project-card {border-color: #3b5264;}
+        .project-card:hover { border-color:#7BC9FF; box-shadow:0 25px 45px rgba(133,118,255,.15); }
+        .project-image { width: 100%; height: auto; aspect-ratio: 16 / 10; overflow: hidden; }
+        .project-image img { width:100%; height:auto; object-fit:unset; object-position: top center; display: block; transition: transform 0.4s ease; }
+        /*.project-card:hover .project-image img { transform:scale(1.08); }*/
+        .project-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(13,17,23,.9),transparent); }
+        .project-content { padding: .3rem 1.25rem 1.5rem 1.25rem; }
+        .project-category { color:#7BC9FF; font-size:.60rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-top: 10px; margin-bottom:5px; }
+        .project-title { font-size:1.20rem; font-weight:800; margin-bottom:12px; padding: .10rem .7rem .0rem .0rem;}
+        .project-desc { color:#94a3b8; line-height:1.4; font-size:.85rem; margin-bottom:15px; }
+        .light .project-desc { color:#64748b; }
+        .tag { display:inline-block; padding:3px 10px; border-radius:999px; font-size:.65rem; font-weight:600; margin:3px; }
+        .tag-tech { background:rgba(123,201,255,.12); border:1px solid rgba(123,201,255,.2); color:#A3FFD6; }
+        .tag-tech { color: #8576FF; }
+        .project-link-demo { font-size: 1rem; font-weight:600; text-decoration:none; padding: .3rem .0rem .0rem .0rem; margin-top: -10px; }
+        .dark .project-link-demo { color:#A3FFD6; }
+        .light .project-link-demo { color:#1C1678; }
+        .dark .project-link-src { color: #CBD5E1; }
+        .light .project-link-src { color: #475569; }
+        .dark .project-link-src:hover { color: #A3FFD6; }
+        .light .project-link-src:hover { color: #1C1678; }
+
+        .dark .project-link-demo:hover { color:#A3FFD6; opacity:.8; }
+        .light .project-link-demo:hover { color:#1C1678; opacity:.8; }
+        .project-link-src { color:#94a3b8; text-decoration:none; padding: .3rem 1.25rem .0rem 1.25rem; margin-top: -10px;}
+        .project-link-src:hover { color:white; }
+
+        .contact-card { border-radius:24px; padding:30px; backdrop-filter:blur(12px); background:rgba(22,27,34,.7); border:1px solid rgba(255,255,255,.04); }
+        .light .contact-card { background:white; border:1px solid rgba(0,0,0,.04); box-shadow:0 4px 20px rgba(0,0,0,.04); }
+        .contact-input { width:100%; background:#0D1117; border:1px solid #1E2532; border-radius:12px; padding:14px 16px; color:white; outline:none; transition:.25s; }
+        .light .contact-input { background:#F4F7FA; border:1px solid #EBF0F6; color:#1E293B; }.contact-input:focus { border-color:#A3FFD6; }
+.dark .contact-input:focus { border-color:#A3FFD6; }
+.light .contact-input:focus { border-color:#1C1678; }
+
+        .social-btn { width:54px; height:54px; border-radius:14px; display:flex; align-items:center; justify-content:center; background:#0D1117; border:1px solid rgba(255,255,255,.05); color:#94a3b8; font-size:1.2rem; transition:.25s; }
+        .light .social-btn { background:#F4F7FA; border:1px solid rgba(0,0,0,.04); color:#64748b; }
+        .social-btn:hover { color:#A3FFD6; border-color:#7BC9FF; transform:translateY(-3px); }
+        .light .social-btn:hover { color:#8576FF; border-color:#8576FF; }
+
+        /* ABOUT */
+        .about-section { background:#161B22; }
+        .light .about-section { background:#FFFFFF; }
+
+        /* EXPERIENCE */
+        .exp-card { background:#1C212B; border:2px solid #7BC9FF; border-radius:16px; transition:.3s; position: relative; }
+        .light .exp-card { background:#FFFDF9; border:2px solid #7BC9FF; }
+        .exp-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(163,255,214,.15); }
+        .dark h2 i.fa-briefcase { color: #A3FFD6 !important; }
+        .light h2 i.fa-briefcase { color: #1C1678 !important; }
+
+        .exp-card.exp-arrow-right::after {
+            content: "";
+            position: absolute;
+            top: 16px;
+            right: -14px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 14px solid #7BC9FF;
+            z-index: 3;
+        }
+        .light .exp-card.exp-arrow-right::after { border-left-color: #7BC9FF; }
+
+        .exp-card.exp-arrow-left::after {
+            content: "";
+            position: absolute;
+            top: 16px;
+            left: -14px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 14px solid #7BC9FF;
+            z-index: 3;
+        }
+        .light .exp-card.exp-arrow-left::after { border-right-color: #7BC9FF; }
+        
+
+        /* CERTIFICATIONS */
+        .cert-section { background:#0D1117; }
+        .light .cert-section { background:#F4F7FA; }
+        .cert-card { background:#161B22; border:1px solid rgba(255,255,255,.04); border-radius:20px; overflow:hidden; transition:.3s; }
+        .light .cert-card { background:white; border:1px solid rgba(0,0,0,.04); box-shadow:0 4px 20px rgba(0,0,0,.04); }
+        .cert-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(123,201,255,.15); border-color:#7BC9FF; }
+
+        .dark .timeline-line { background: #A3FFD6; }
+        .light .timeline-line { background: #1C1678; }
+
+#cert-grid { align-content: start; }
+
+        /* Light mode */
+:root {
+    --cert-img-bg: #f0f0f0;
+}
+[data-theme="dark"] {
+    --cert-img-bg: #1a1a2e;
+}
+
+.cert-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background-color: var(--cert-img-bg);
+}
+        .cert-issuer { color:#FFA12E; font-weight:800; font-size:.95rem; margin-bottom:8px; }
+        .cert-title { font-size:.88rem; font-weight:600; margin-bottom:6px; }
+        .dark .cert-title { color:#e2e8f0; }
+        .light .cert-title { color:#1e293b; }
+        .cert-date { font-size:.78rem; color:#64748b; }
+
+        /* SECTION BG */
+        .section-dark { background:#0D1117; }
+        .light .section-dark { background:#F4F7FA; }
+        .section-alt { background:#161B22; }
+        .light .section-alt { background:#FFFFFF; }
+
+        /* FOOTER */
+        .site-footer { background:#0D1117; border-top:1px solid rgba(255,255,255,.04); }
+        .dark .site-footer,
+        .light .site-footer {
+            background: #ffba66 !important;
+        }
+        .light .site-footer { background:#FFFFFF; border-top:1px solid rgba(0,0,0,.04); }
+        .dark .footer-link { color:#ffff; text-decoration:none; transition:.2s; display:flex; align-items:center; gap:8px; }
+        .light .footer-link {color: #000000}
+        .footer-link:hover { color:#7BC9FF; }
+        .footer-social { width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,.05); display:flex; align-items:center; justify-content:center; color:#94a3b8; text-decoration:none; transition:.25s; font-size:1rem; }
+        .light .footer-social { background:rgba(52, 49, 49, 0.172); }
+        .footer-social:hover { background:#8576FF; color:rgb(11, 11, 11); transform:translateY(-3px); }
+        .site-footer .text-cyan-400 { color: #8576FF; }
+        .dark .footer-link .icon-quick { color: #FFFFFF !important; }
+        .light .footer-link .icon-quick { color: #1E293B !important; }
+        .dark .site-footer .text-gray-400 { color: #000000 !important; }
+        .light .site-footer .text-gray-400 { color: #000000 !important; }
+        .dark .site-footer h3 { color: #000000 !important; }
+.dark .footer-link { color: #000000 !important; }
+.dark .footer-link .icon-quick { color: #000000 !important; }
+
+        /* WHATSAPP */
+        .wa-bubble { position:fixed; bottom:28px; right:28px; z-index:9999; width:60px; height:60px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(37,211,102,.5); transition:transform .25s,box-shadow .25s; text-decoration:none; }
+        .wa-bubble:hover { transform:scale(1.12); box-shadow:0 10px 32px rgba(37,211,102,.65); }
+        .wa-bubble i { color:white; font-size:28px; }
+
+        /* SCROLL TOP */
+        .scroll-top { position:fixed; bottom:100px; right:28px; z-index:9999; width:48px; height:48px; border-radius:50%; background:#161B22; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,.4); transition:.25s; cursor:pointer; border:none; color:white; }
+        .light .scroll-top { background:#FFFFFF; color:#374151; box-shadow:0 4px 16px rgba(0,0,0,.08); }
+        .scroll-top:hover { background:#8576FF; color:white; transform:translateY(-3px); }
+
+        /* TOAST */
+        #toast { position:fixed; right:24px; bottom:24px; z-index:99998; padding:14px 22px; border-radius:12px; font-weight:600; transform:translateY(80px); opacity:0; transition:.35s; }
+        #toast.show { transform:translateY(0); opacity:1; }
+        #toast.success { background:#123326; color:#A3FFD6; }
+        #toast.error { background:#7f1d1d; color:#fca5a5; }
+
+        #mobileMenu {
+            transition: all .3s ease;
+        }
+
+        .light #mobileMenu {
+            background: #FFFFFF;
+            border-top: 1px solid #EBF0F6;
+        }
+
+        .light #mobileMenu a {
+            color: #374151;
+        }
+
+        .dark #mobileMenu {
+            background: #0D1117;
+            border-top: 1px solid rgba(255,255,255,.05);
+        }
+
+        .dark #mobileMenu a {
+            color: white;
+        }
+
+        /* * FIX CONTRAST UNTUK LIGHT MODE TANPA MENGUBAH HTML:
+         * Memastikan warna neon (seperti cyan) tidak hilang di latar putih 
+         */
+        .light .text-cyan-400, 
+        /* Hero: "Hello, I'm" / "Halo, Saya" */
+        #home p.text-cyan-400 { color: #8576FF; }
+
+        /* About: role line "UI/UX Designer | Web Developer | ..." */
+        #about p.text-cyan-400.text-lg { color: #FFA12E; }
+        .light .text-cyan-400.text-lg { color: #8576FF !important; }
+
+        /* About: label Email, Phone, Address */
+        #about span.text-cyan-400.w-24 { color: #8576FF; }
+        .light .text-cyan-400.w-24 {color: #FFA12E !important; }
+        .light .text-green-400, 
+        .light .text-red-400, 
+        .light .text-orange-400, 
+        .light .text-yellow-400, 
+        .light .text-blue-300, 
+        .light .text-blue-400 { color: #8576FF !important; }
+        .dark .bg-cyan-500 { background: #A3FFD6 !important; color: #1C1678 !important; transition: all 0.3s ease; }
+        .light .bg-cyan-500 { background: #1C1678 !important; color: #A3FFD6 !important; transition: all 0.3s ease; }
+        .icon-calendar-exp { color: #8576FF; }
+
+        .dark .bg-cyan-500 i { color: #1C1678 !important; }
+        .light .bg-cyan-500 i { color: #A3FFD6 !important; }
+        .dark .bg-cyan-500 {background: #A3FFD6 !important; }
+        .dark .border-violet-500 { border-color:#A3FFD6 !important; color:#A3FFD6 !important; }
+        .light .border-violet-500 { border-color:#1C1678 !important; color:#1C1678 !important; }
+
+        .dark .border-violet-500:hover { background-color:#A3FFD6 !important; color:#1C1678 !important; }
+        .light .border-violet-500:hover { background-color:#1C1678 !important; color:#A3FFD6 !important; }
+
+        .dark .bg-cyan-500:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(163,255,214,.25); }
+        .light .bg-cyan-500:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(28,22,120,.25); }
+
+.pagination-btn {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #7BC9FF;
+    color: white;
+    transition: background 0.2s;
+}
+
+.pagination-btn.active {
+    background-color: #8576FF;
+}
+
+.pagination-btn.disabled {
+    background-color: rgba(129, 140, 154, 0.4);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: not-allowed;
+}
+
+/* Dark mode */
+[data-theme="dark"] .pagination-btn {
+    background-color: #7BC9FF;
+}
+
+[data-theme="dark"] .pagination-btn.active {
+    background-color: #8576FF;
+}
+
+[data-theme="dark"] .pagination-btn.disabled {
+    background-color: #2A2560;
+}
+
+/* Light mode */
+[data-theme="light"] .pagination-btn.disabled {
+    background-color: #C7C3EE;
+}
+
+.contact-input{
+    width: 100%;
+    padding: 16px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.15);
+    color: white;
+    transition: all .3s ease;
+    height: 58px;
+}
+textarea.contact-input{
+    height: 130px;
+    min-height: 180px;
+}
+
+.contact-input:focus{
+    outline: none;
+}
+.dark .contact-input:focus { border-color: #A3FFD6; }
+.light .contact-input:focus { border-color: #1C1678; }
+.dark .input-group:focus-within .input-icon { color: #A3FFD6; }
+.light .input-group:focus-within .input-icon { color: #1C1678; }
+
+.input-icon{
+    color: #9CA3AF;
+    transition: all .3s ease;
+}
+
+/*untuk quick links */
+.dark .footer-link:hover { color: #A3FFD6 !important; }
+.light .footer-link:hover { color: #1C1678 !important; }
+
+.dark .footer-link:hover .icon-quick { color: #A3FFD6 !important; }
+.light .footer-link:hover .icon-quick { color: #1C1678 !important; }
+
+.input-group:focus-within .input-icon{
+    color: #A3FFD6;
+}
+
+    /* Warna Icon Quick Links */
+    .icon-quick {
+        color: #A3FFD6 !important;
+    }
+
+    /* Warna Icon Contact Info */
+.icon-contact { color: #8576FF !important; }
+
+    /* Gaya Dasar Social Icons */
+    .footer-social {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: rgba(52, 49, 49, 0.172);
+        color: #e2e8f0;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    /* Efek Hover Social Icons */
+    .footer-social:hover {
+        background-color: #A3FFD6 !important;
+        color: #1C1678 !important;
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(163, 255, 214, 0.3);
+    }
+    .light .footer-social:hover {
+    background: #1C1678 !important;
+    color: #A3FFD6 !important;
+    }
+
+    /* Sembunyikan elemen bahasa yang tidak aktif */
+    [data-lang-inline="en"] { display: none; }
+    [data-lang-inline="id"].visible, [data-lang-inline="en"].visible { display: inline; }
+
+    .footer-link {
+        color: #94a3b8;
+        transition: color 0.3s;
+    }
+    .footer-link:hover {
+        color: white;
+    }
+.dark .icon-section-a { color: #A3FFD6; }
+.light .icon-section-a { color: #1C1678; }
+
+.dark .icon-section-b { color: #A3FFD6; }
+.light .icon-section-b { color: #1C1678; }
+
+.project-link-demo.link-disabled,
+.project-link-src.link-disabled {
+    color: rgba(148, 163, 184, 0.4) !important;
+    cursor: not-allowed;
+}
+    </style>
+</head>
+
+<body>
+
+<div id="toast"></div>
+
+<div id="langModal">
+    <div class="lang-modal-box">
+        <p class="lang-modal-config">KONFIGURASI</p>
+        <p class="lang-modal-title" id="langModalTitle">PILIH BAHASA</p>
+
+        <div class="lang-option" id="optEn" onclick="setLang('en')">
+            <div class="lang-badge">EN</div>
+            <span class="lang-label">English</span>
+            <i class="fas fa-check-circle lang-check"></i>
+        </div>
+
+        <div class="lang-option selected" id="optId" onclick="setLang('id')">
+            <div class="lang-badge">ID</div>
+            <span class="lang-label">Indonesia</span>
+            <i class="fas fa-check-circle lang-check"></i>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex items-center justify-between h-16">
+
+            <div class="flex items-center">
+                <a href="#home">
+                <img
+                    src="images/Logo-Nama.png"
+                    alt="Giva Violen Pardede"
+                    class="h-20 md:h-20 w-auto">
+                </a>
+            </div>
+
+<div class="hidden lg:flex items-center gap-7 text-sm">
+
+    <a href="#home" class="nav-link nav-item transition">
+        <span data-lang-inline="id" class="visible">Beranda</span>
+        <span data-lang-inline="en">Home</span>
+    </a>
+
+    <a href="#about" class="nav-link nav-item transition">
+        <span data-lang-inline="id" class="visible">Tentang</span>
+        <span data-lang-inline="en">About</span>
+    </a>
+
+    <a href="#skills" class="nav-link nav-item transition">
+        <span data-lang-inline="id" class="visible">Keahlian</span>
+        <span data-lang-inline="en">Skills</span>
+    </a>
+
+    <a href="#projects" class="nav-link nav-item transition">
+        <span data-lang-inline="id" class="visible">Proyek</span>
+        <span data-lang-inline="en">Projects</span>
+    </a>
+
+    <a href="#experience" class="nav-link nav-item transition">
+        <span data-lang-inline="id" class="visible">Pengalaman</span>
+        <span data-lang-inline="en">Experience</span>
+    </a>
+
+    <a href="#certifications" class="nav-link nav-item transition">
+        <span data-lang-inline="id" class="visible">Sertifikasi</span>
+        <span data-lang-inline="en">Certifications</span>
+    </a>
+
+</div>
+
+            <div class="flex items-center gap-3">
+
+                <div class="theme-toggle-wrap">
+                    <i class="fas fa-sun theme-icon theme-icon-sun"></i>
+
+                    <button
+                        class="toggle-switch dark-active"
+                        id="themeToggle"
+                        onclick="toggleTheme()">
+                    </button>
+
+                    <i class="fas fa-moon theme-icon theme-icon-moon"></i>
+                </div>
+
+                <button
+                    class="lang-trigger"
+                    id="langTrigger"
+                    onclick="openLangModal()">
+
+                    <i class="fas fa-globe"></i>
+                    <span id="langLabel">Id</span>
+
+                    <i
+                        class="fas fa-chevron-up"
+                        id="langChevron"
+                        style="font-size:.7rem;">
+                    </i>
+
+                </button>
+
+                <button
+                    id="menuBtn"
+                    class="lg:hidden text-white text-2xl"
+                    onclick="toggleMobileMenu()">
+
+                    <i class="fas fa-bars"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+<div
+    id="mobileMenu"
+    class="hidden lg:hidden fixed top-16 left-0 w-full bg-slate-900 border-t border-slate-700 z-40">
+
+    <div class="flex flex-col p-5 space-y-4">
+
+        <a href="#home" class="nav-link" onclick="toggleMobileMenu()">Home</a>
+
+        <a href="#about" class="nav-link" onclick="toggleMobileMenu()">About</a>
+
+        <a href="#skills" class="nav-link" onclick="toggleMobileMenu()">Skills</a>
+
+        <a href="#projects" class="nav-link" onclick="toggleMobileMenu()">Projects</a>
+
+        <a href="#experience" class="nav-link" onclick="toggleMobileMenu()">Experience</a>
+
+        <a href="#certifications" class="nav-link" onclick="toggleMobileMenu()">Certifications</a>
+
+    </div>
+
+</div>
+
+<section id="home" class="hero-bg min-h-screen flex items-center justify-center pt-20">
+    <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+
+        <p class="text-cyan-400 uppercase tracking-[0.2em] font-semibold mb-5">
+            <span data-lang-inline="id" class="visible">Halo, Saya</span>
+            <span data-lang-inline="en">Hello, I'm</span>
+        </p>
+
+        <h1 class="animated-gradient-name text-5xl md:text-7xl font-black mb-6 leading-tight">
+            Giva Violen Pardede
+        </h1>
+
+        <p class="text-gray-400 text-lg md:text-2xl leading-relaxed max-w-3xl mx-auto mb-10">
+            <span data-lang-inline="id" class="visible">Saya memiliki ketertarikan pada bidang UI/UX Design, Web Development, Quality Assurance, dan Data Analysis.</span>
+            <span data-lang-inline="en">I am interested in UI/UX Design, Web Development, Quality Assurance, and Data Analysis.</span>
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-5">
+            <a href="#projects" class="btn-gradient px-8 py-4 rounded-full font-bold text-white">
+                <span data-lang-inline="id" class="visible">Lihat Proyek</span>
+                <span data-lang-inline="en">View Projects</span>
+            </a>
+            <a href="#contact" class="px-8 py-4 rounded-full border border-violet-500 text-violet-400 font-bold hover:bg-violet-600 hover:text-white transition">
+                <span data-lang-inline="id" class="visible">Hubungi Saya</span>
+                <span data-lang-inline="en">Get in Touch</span>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<section id="about" class="about-section min-h-screen flex items-center">
+    <div class="max-w-6xl mx-auto px-6">
+
+<h2 class="text-4xl font-black text-center mb-16">
+    <i class="fas fa-user icon-section-a mr-3"></i>
+    <span data-lang-inline="id" class="visible">Tentang</span>
+    <span data-lang-inline="en">About</span>
+</h2>
+
+        <div class="flex flex-col md:flex-row items-center gap-14 lg:gap-24">
+
+            <div class="flex-shrink-0 flex justify-center">
+                    <div style="width:280px;height:320px;border-radius:19px;padding:3px;background:#7BC9FF;box-shadow:0 0 60px rgba(123,201,255,.3);">                    <div style="width:100%;height:100%;border-radius:16px;overflow:hidden;background:#161B22;">
+                        <img src="images/foto-profile.jpg" alt="Giva Violen Pardede" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1">
+                <h3 class="text-3xl font-black mb-2">
+                    <span data-lang-inline="id" class="visible">Saya Giva Violen Pardede</span>
+                    <span data-lang-inline="en">I'm Giva Violen Pardede</span>
+                </h3>
+                <p class="text-cyan-400 font-bold text-lg mb-5">
+                    <span data-lang-inline="id" class="visible">UI/UX Designer | Pengembang Web | Quality Assurance | Analis Data</span>
+                    <span data-lang-inline="en">UI/UX Designer | Web Developer | Quality Assurance | Data Analyst</span>
+                </p>
+
+                <p class="text-gray-400 leading-relaxed mb-8">
+                    <span data-lang-inline="id" class="visible">Saya lahir di Laguboti pada 2 Juni 2006 dan saat ini sedang menempuh pendidikan Sarjana Informatika di Institut Teknologi Del, Toba. Saya memiliki minat yang kuat dalam bidang UI/UX Design, Web Development, Quality Assurance, dan Data Analysis, serta terus berupaya mengembangkan keterampilan dan pengetahuan di bidang-bidang tersebut.</span>
+                    <span data-lang-inline="en">I was born in Laguboti on June 2, 2006, and I am currently pursuing a Bachelor's degree in Informatics at Institut Teknologi Del, Toba. I have a strong interest in UI/UX Design, Web Development, Quality Assurance, and Data Analysis, and I continuously strive to develop my skills and knowledge in these fields.</span>
+                </p>
+
+                <div class="space-y-4 mb-8 text-sm">
+
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-cyan-400 font-bold w-24">
+                            Email
+                        </span>
+
+                        <span class="text-gray-400">
+                            : givaviolenpardede26@gmail.com
+                        </span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-cyan-400 font-bold w-24">
+                            <span data-lang-inline="id" class="visible">Telepon</span>
+                            <span data-lang-inline="en">Phone</span>
+                        </span>
+                        <span class="text-gray-400">
+                            : +62 852-6222-9901
+                        </span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-cyan-400 font-bold w-24">
+                            <span data-lang-inline="id" class="visible">Alamat</span>
+                            <span data-lang-inline="en">Address</span>
+                        </span>
+
+                        <span class="text-gray-400">
+                            <span data-lang-inline="id" class="visible">: Laguboti, Toba, Sumatra Utara, Indonesia</span>
+                            <span data-lang-inline="en">: Laguboti, Toba, North Sumatra, Indonesia</span>
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="file/cv-giva.pdf" target="_blank" class="px-8 py-3 bg-cyan-500 text-white font-bold rounded-full hover:bg-cyan-400 transition-all shadow-[0_0_20px_rgba(112,145,245,0.45)] flex items-center justify-center gap-3">
+                        <i class="fas fa-eye"></i>
+                        <span data-lang-inline="id" class="visible"> CV </span>
+                        <span data-lang-inline="en"> CV </span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="skills" class="section-dark py-24">
+    <div class="max-w-6xl mx-auto px-6">
+
+<h2 class="text-4xl font-black text-center mb-4">
+    <i class="fas fa-code icon-section-a mr-3"></i>
+    <span data-lang-inline="id" class="visible">Keahlian</span>
+    <span data-lang-inline="en">Skills</span>
+</h2>
+        <p class="text-gray-400 text-center mb-16">
+            <span data-lang-inline="id" class="visible">Teknologi dan alat yang saya kuasai.</span>
+            <span data-lang-inline="en">Technologies and tools I work with.</span>
+        </p>
+
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-java-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">Java</p>
+    </div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-c-original colored text-3xl mb-3"></i>
+        <p class="font-bold">C</p>
+    </div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-spring-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">Spring Boot</p>
+    </div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-html5-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">HTML5</p>
+    </div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-css3-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">CSS</p>
+    </div>
+
+<div class="skill-card p-5 text-center">
+    <i class="devicon-tailwindcss-original colored text-3xl mb-3"></i>
+    <p class="font-bold">Tailwind CSS</p>
+</div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-javascript-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">JavaScript</p>
+    </div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-swift-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">Swift (iOS)</p>
+    </div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-mysql-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">MySQL</p>
+    </div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-postgresql-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">PostgreSQL</p>
+    </div>
+
+<div class="skill-card p-3 text-center">
+    <img
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+        alt="Python"
+        class="w-12 h-12 mx-auto mb-0"
+    >
+    <p class="font-bold">Python</p>
+</div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-git-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">Git</p>
+    </div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-github-original text-3xl mb-3"></i>
+        <p class="font-bold">GitHub</p>
+    </div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="devicon-figma-plain colored text-3xl mb-3"></i>
+        <p class="font-bold">UI/UX Design</p>
+    </div>
+
+<!-- Agile -->
+<div class="skill-card p-5 text-center">
+    <i class="fas fa-arrows-rotate text-green-500 text-3xl mb-3"></i>
+    <p class="font-bold">Agile</p>
+</div>
+
+<!-- Scrum -->
+<div class="skill-card p-5 text-center">
+    <i class="fas fa-people-group text-purple-500 text-3xl mb-3"></i>
+    <p class="font-bold">Scrum</p>
+</div>
+
+<!-- CBL -->
+<div class="skill-card p-5 text-center">
+    <i class="fas fa-lightbulb text-yellow-400 text-3xl mb-3"></i>
+    <p class="font-bold">CBL</p>
+</div>
+
+<!-- OOP -->
+<div class="skill-card p-5 text-center">
+    <i class="fas fa-cubes text-orange-600 text-3xl mb-3"></i>
+    <p class="font-bold">OOP</p>
+</div>
+
+<!-- MVC -->
+<div class="skill-card p-5 text-center">
+    <i class="fas fa-diagram-project text-cyan-500 text-3xl mb-3"></i>
+    <p class="font-bold">MVC</p>
+</div>
+
+<!-- Website Development -->
+<div class="skill-card p-5 text-center">
+    <i class="fas fa-laptop-code text-sky-500 text-3xl mb-3"></i>
+    <p class="font-bold">Website Development</p>
+</div>
+
+    <div class="skill-card p-5 text-center">
+        <i class="fas fa-code-branch text-cyan-400 text-3xl mb-3"></i>
+        <p class="font-bold">Data Structures & Algorithms</p>
+    </div>
+
+</div>
+
+    </div>
+</section>
+
+<section id="projects" class="section-alt py-24">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <h2 class="text-4xl font-black text-center mb-4">
+            <i class="fas fa-diagram-project icon-section-a mr-3"></i>
+            <span data-lang-inline="id" class="visible">Proyek Saya</span>
+            <span data-lang-inline="en">My Projects</span>
+        </h2>
+        <p class="text-gray-400 text-center max-w-3xl mx-auto mb-16 leading-8">
+            <span data-lang-inline="id" class="visible">Kumpulan proyek yang menampilkan keahlian saya dalam pengembangan web dan pemecahan masalah inovatif.</span>
+            <span data-lang-inline="en">A collection of projects showcasing my expertise in web development and innovative problem-solving.</span>
+        </p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <div class="project-card">
+                <div class="project-image"><img src="images/project1.png" alt=""></div>
+                <div class="project-content">
+                    <p class="project-category" style="color: #FFA12E;">
+                        <span data-lang-inline="id" class="visible">Desain Aplikasi Website</span>
+                        <span data-lang-inline="en">Website Apps Design</span>
+                    </p>
+                    <h3 class="project-title" style=>LaperCuy</h3>
+                    <p class="project-desc">
+                        <span data-lang-inline="id" class="visible">Pemesanan makanan daring di kantin kini semakin praktis berkat aplikasi web real-time LaperCuy.</span>
+                        <span data-lang-inline="en">Online food ordering in cafeterias is now more convenient with the LaperCuy real-time web app.</span>
+                    </p>
+                    <div class="mb-5"><span class="tag tag-tech">Figma</span><span class="tag tag-tech">PosgresSQL</span><span class="tag tag-tech">HTML</span><span class="tag tag-tech">CSS</span><span class="tag tag-tech">JavaScript</span></div>
+                    <div class="flex items-center gap-5">
+                        <a href="https://colorhunt.co/palette/1c16788576ff7bc9ffa3ffd6" target="_blank" rel="noopener noreferrer" class="project-link-demo"><i class="fas fa-external-link-alt"></i>
+                            <span data-lang-inline="id" class="visible">Lihat</span>
+                            <span data-lang-inline="en">View</span>
+                        </a>
+                        <a href="https://www.figma.com/design/a0TM1gswNdvkRygE9QzaUZ/Project_IMK?t=hT0ClfAOU4FnwUpD-1" target="_blank" rel="noopener noreferrer" class="project-link-src"><i class="fab fa-figma"></i> 
+                            <span data-lang-inline="id" class="visible">Sumber</span>
+                            <span data-lang-inline="en">Source</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image"><img src="images/project2.png" alt=""></div>
+                <div class="project-content">
+                    <p class="project-category" style="color: #FFA12E;">
+                        <span data-lang-inline="id" class="visible">Aplikasi iOS</span>
+                        <span data-lang-inline="en">iOS Application</span>
+                    </p>
+                    <h3 class="project-title" style=>CALORIZZ</h3>
+                    <p class="project-desc">
+                        <span data-lang-inline="id" class="visible">CALORIZZ adalah aplikasi iOS yang dirancang untuk melacak kalori dalam makanan Anda dengan cepat dan akurat.</span>
+                        <span data-lang-inline="en">CALORIZZ is an iOS app designed to quickly and accurately track the calories in your food.</span>
+                    </p>
+                    <div class="mb-5"><span class="tag tag-tech">Swift</span><span class="tag tag-tech">Dataset</span></div>
+                    <div class="flex items-center gap-5">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="project-link-src"><i class="fas fa-external-link-alt"></i>
+                            <span data-lang-inline="id" class="visible">Lihat</span>
+                            <span data-lang-inline="en">View</span>
+                        </a>
+                        <a href="https://github.com/zensantomart017/CalorieTrackerApp-CALORIZZ.git" target="_blank" rel="noopener noreferrer" class="project-link-src"><i class="fab fa-github"></i>
+                            <span data-lang-inline="id" class="visible">Sumber</span>
+                            <span data-lang-inline="en">Source</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image"><img src="images/project3.png" alt=""></div>
+                <div class="project-content">
+                    <p class="project-category" style="color: #FFA12E;">
+                        <span data-lang-inline="id" class="visible">Aplikasi Web</span>
+                        <span data-lang-inline="en">Web Application</span>
+                    </p>
+                    <h3 class="project-title" style=>WatchList</h3>
+                    <p class="project-desc">
+                        <span data-lang-inline="id" class="visible">Sistem yang dirancang untuk melacak daftar tontonan Anda, termasuk tayangan yang sudah Anda tonton, yang ingin Anda tonton, dan yang sudah Anda tonton.</span>
+                        <span data-lang-inline="en">A system designed to track your watchlist, including what you've watched, what you want to watch, and what you've already watched.</span>
+                    </p>
+                    <div class="mb-5"><span class="tag tag-tech">HTML</span><span class="tag tag-tech">Java</span></div>
+                    <div class="flex items-center gap-5">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="project-link-demo"><i class="fas fa-external-link-alt"></i>
+                            <span data-lang-inline="id" class="visible">Lihat</span>
+                            <span data-lang-inline="en">View</span>
+                        </a>
+                        <a href="https://github.com/givaviolen/ifs24054-pbo-proyek.git" target="_blank" rel="noopener noreferrer" class="project-link-src"><i class="fab fa-github"></i>
+                            <span data-lang-inline="id" class="visible">Sumber</span>
+                            <span data-lang-inline="en">Source</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="experience" class="section-dark py-24">
+    <div class="max-w-4xl mx-auto px-6">
+
+        <h2 class="text-4xl font-black text-center mb-16">
+            <i class="fas fa-briefcase mr-3 text-orange-400"></i>
+            <span data-lang-inline="id" class="visible">Pengalaman</span>
+            <span data-lang-inline="en">Experience</span>
+        </h2>
+
+        <div style="position:relative;">
+            <div class="timeline-line" style="position:absolute;left:50%;transform:translateX(-50%);top:0;bottom:0;width:2px;"></div>
+
+            <div style="display:flex;align-items:flex-start;margin-bottom:60px;position:relative;">
+                <div style="flex:1;padding-right:50px;">
+                    <div class="exp-card exp-arrow-right">
+                        <img src="images/exp1.jpg" alt="" style="width:100%;height:200px;object-fit:cover;border-radius:14px 14px 0 0;">
+                        <div style="padding:20px;">
+                            <p style="color:#FFA12E;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;"> 
+                                <span data-lang-inline="id" class="visible">Himpunan Mahasiswa Sarjana Informatika (HIMASTI)</span>
+                                <span data-lang-inline="en">Computer Science Undergraduate Student Association (HIMASTI)</span>
+                            </p>
+                            <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:10px;">
+                                <span data-lang-inline="id" class="visible">Divisi Hubungan Masyarakat</span>
+                                <span data-lang-inline="en">Public Relations Division</span>
+                            </h3>
+                            <p style="color:#94a3b8;font-size:.88rem;"><i class="fas fa-calendar-days mr-2 icon-calendar-exp"></i>
+                                <span data-lang-inline="id" class="visible">Januari 2026 – Sekarang</span>
+                                <span data-lang-inline="en">January 2026 – Present</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-dot">
+                    <img src="images/logo.png" alt="Logo" class="timeline-logo-full">
+                </div>
+                <div style="flex:1;padding-left:50px;"></div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;margin-bottom:60px;position:relative;">
+                <div style="flex:1;padding-right:50px;"></div>
+                <div style="flex:1;padding-left:50px;">
+                    <div class="exp-card exp-arrow-left">
+                        <img src="images/exp2.jpeg" alt="" style="width:100%;height:200px;object-fit:cover;border-radius:14px 14px 0 0;">
+                        <div style="padding:20px;">
+                            <p style="color:#FFA12E;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">APPLE DEVELOPER ACADEMY</p>
+                            <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:10px;">Software Engineer - Aplikasi CALORIZZ</h3>
+                            <p style="color:#94a3b8;font-size:.88rem;"><i class="fas fa-calendar-days mr-2 icon-calendar-exp"></i>
+                                <span data-lang-inline="id" class="visible">Juni 2025 – Juli 2025</span>
+                                <span data-lang-inline="en">June 2025 – July 2025</span></p>
+                        </div>
+                    </div>
+                    <div class="timeline-dot">
+                        <img src="images/logo.png" alt="Logo" class="timeline-logo-full">
+                    </div>
+                <div style="flex:1;padding-left:50px;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="certifications" class="cert-section py-24">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <h2 class="text-4xl font-black text-center mb-4">
+            <i class="fas fa-award icon-section-a mr-3"></i>
+            <span id="certCount" style="color:#FFA12E;">3</span> CERTIFICATIONS &amp; <span class="cert-training-text">Training</span>
+        </h2>
+        <p class="text-gray-400 text-center mb-16">
+            <span data-lang-inline="id" class="visible">Sertifikat dan pelatihan yang telah saya selesaikan.</span>
+            <span data-lang-inline="en">Certificates and training I have completed.</span>
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="cert-grid">
+            <div class="cert-card">
+                <img src="images/cert1.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">Apple Developer Academy</p><p class="cert-title">iOS Developer Foundation Program</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>10 Juni 2025 - 11 Juli 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert2.png" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">ICP Indonesia</p><p class="cert-title">National Round of the WCHL</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>Agustus 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert3.png" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">Kemendiktisaintek</p><p class="cert-title">GEMASTIK XVIII</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>27 Oktober 2025 - 30 Oktober 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert4.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">DQLab</p><p class="cert-title">SQL Database Management</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>31 Juli 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert5.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">DQLab</p><p class="cert-title">Fundamental SQL</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>4 September 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert6.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">MySkill</p><p class="cert-title">Data Analysis Fundamental</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>23 April 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert7.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">Bandung National Institute of Technology (ITENAS)</p><p class="cert-title">Itenas Digital Transformation Compotition</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>31 Juli 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert8.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">Dicoding</p><p class="cert-title">Memulai Pemprograman Dengan C</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>27 April 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert9.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">AWS</p><p class="cert-title">Introduction to Containers</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>8 Juni 2026</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert10.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">Dicoding</p><p class="cert-title">Memulai Pemrograman Dengan Java</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>10 Juni 2026</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert11.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">Dicoding</p><p class="cert-title">AI Praktis untuk Produktivitas</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>18 Juni 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert12.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">MySkill</p><p class="cert-title">Designing Using Canva</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>8 Agustus 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert13.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">MySkill</p><p class="cert-title">UX Writing Introduction</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>14 Agustus 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert14.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">DQLab</p><p class="cert-title">Python Fundamental for Data Science</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>2 Juli 2025</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert15.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">CODEPOLITAN</p><p class="cert-title">Basic Cybersecurity</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>14 Juli 2026</p></div>
+            </div>
+
+            <div class="cert-card">
+                <img src="images/cert15.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">CODEPOLITAN</p><p class="cert-title">Basic Cybersecurity</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>14 Juli 2026</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert15.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">CODEPOLITAN</p><p class="cert-title">Basic Cybersecurity</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>14 Juli 2026</p></div>
+            </div>
+            <div class="cert-card">
+                <img src="images/cert15.jpg" alt="" class="cert-img">
+                <div style="padding:18px;"><p class="cert-issuer">CODEPOLITAN</p><p class="cert-title">Basic Cybersecurity</p><p class="cert-date"><i class="fas fa-calendar mr-1"></i>14 Juli 2026</p></div>
+            </div>
+            
+        </div>
+        <div class="flex justify-center items-center gap-2 mt-10" id="cert-pagination"></div>
+
+    </div>
+</section>
+
+<section id="contact" class="section-alt py-24">
+    <div class="max-w-6xl mx-auto px-6">
+
+        <!-- Heading -->
+        <div class="text-center mb-6">
+            <h2 class="text-4xl font-black flex items-center justify-center gap-3 mb-4">
+                <i class="fas fa-headset icon-section-b"></i>
+                <span data-lang-inline="id" class="visible">Hubungi Saya</span>
+                <span data-lang-inline="en">Get in Touch</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                <span data-lang-inline="id" class="visible">
+                    Saya selalu terbuka untuk belajar, berkolaborasi, dan menjalin koneksi baru. Jangan ragu untuk menghubungi saya jika Anda ingin berdiskusi atau berbagi kesempatan yang menarik.
+                </span>
+                <span data-lang-inline="en">
+                    I am always open to learning, collaborating, and building new connections. Feel free to reach out if you would like to discuss ideas or share exciting opportunities.
+                </span>
+            </p>
+        </div>
+
+        <!-- Contact Card -->
+        <div class="contact-card rounded-3xl p-8 lg:p-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <!-- Left Side Image -->
+                <div class="flex justify-center">
+                    <img src="images/contact-illustration.png" alt="Contact Illustration" class="w-full max-w-md object-contain">
+                </div>
+
+                <!-- Right Side Form -->
+                <div class="space-y-4">
+
+                    <!-- Name -->
+                    <div class="input-group">
+                        <div class="relative">
+                            <i class="fas fa-user input-icon absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="senderName" type="text" class="contact-input pl-14 w-full"
+                                data-placeholder-id="Nama" data-placeholder-en="Name" placeholder="Name">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-group">
+                        <div class="relative">
+                            <i class="fas fa-envelope input-icon absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="senderEmail" type="email" class="contact-input pl-14 w-full"
+                                data-placeholder-id="Email" data-placeholder-en="Email" placeholder="Email"
+                                onblur="validateEmailField()" oninput="clearEmailError()">
+                        </div>
+                        <p id="emailError" class="text-red-400 text-sm mt-1 pl-2 hidden">
+                            <span data-lang-inline="id" class="visible">Format email tidak valid.</span>
+                            <span data-lang-inline="en">Invalid email format.</span>
+                        </p>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="input-group">
+                        <div class="relative">
+                            <i class="fas fa-phone input-icon absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="senderPhone" type="tel" inputmode="numeric" maxlength="15"
+                                class="contact-input pl-14 w-full"
+                                data-placeholder-id="Nomor Telepon" data-placeholder-en="Phone Number" placeholder="Phone Number"
+                                oninput="restrictPhoneInput(this); clearPhoneError()" onblur="validatePhoneField()">
+                        </div>
+                        <p id="phoneError" class="text-red-400 text-sm mt-1 pl-2 hidden">
+                            <span data-lang-inline="id" class="visible">Nomor telepon hanya boleh angka (8-15 digit).</span>
+                            <span data-lang-inline="en">Phone number must contain only digits (8-15 digits).</span>
+                        </p>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="relative input-group">
+                        <i class="fas fa-comment-dots input-icon absolute left-5 top-5 text-gray-400"></i>
+                        <textarea id="senderMessage" rows="7" class="contact-input pl-14 resize-none w-full"
+                            data-placeholder-id="Tulis pesan Anda di sini..." data-placeholder-en="Write your message here..."
+                            placeholder="Write your message here..."></textarea>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="flex justify-end mt-6">
+                        <button id="sendBtn" onclick="sendEmail()"
+                            class="btn-gradient px-5 py-3 rounded-2xl font-bold text-white flex items-center gap-2 shadow-lg hover:shadow-indigo-500/50 transition-all duration-300 transform hover:-translate-y-1">
+                            <span data-lang-inline="id" class="visible">Kirim</span>
+                            <span data-lang-inline="en">Send</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function validateEmailField() {
+    const emailInput = document.getElementById('senderEmail');
+    const emailError = document.getElementById('emailError');
+    const email = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (email !== '' && !emailRegex.test(email)) {
+        emailError.classList.remove('hidden');
+        emailInput.classList.add('border-red-500');
+        return false;
+    } else {
+        emailError.classList.add('hidden');
+        emailInput.classList.remove('border-red-500');
+        return true;
+    }
+}
+
+function clearEmailError() {
+    document.getElementById('emailError').classList.add('hidden');
+    document.getElementById('senderEmail').classList.remove('border-red-500');
+}
+
+function restrictPhoneInput(input) {
+    let value = input.value;
+    const hasPlus = value.startsWith('+');
+    value = value.replace(/[^0-9]/g, '');
+    input.value = hasPlus ? '+' + value : value;
+}
+
+function validatePhoneField() {
+    const phoneInput = document.getElementById('senderPhone');
+    const phoneError = document.getElementById('phoneError');
+    const phone = phoneInput.value.trim();
+    const digitsOnly = phone.replace('+', '');
+    const phoneRegex = /^[0-9]{8,15}$/;
+
+    if (phone !== '' && !phoneRegex.test(digitsOnly)) {
+        phoneError.classList.remove('hidden');
+        phoneInput.classList.add('border-red-500');
+        return false;
+    } else {
+        phoneError.classList.add('hidden');
+        phoneInput.classList.remove('border-red-500');
+        return true;
+    }
+}
+
+function clearPhoneError() {
+    document.getElementById('phoneError').classList.add('hidden');
+    document.getElementById('senderPhone').classList.remove('border-red-500');
+}
+</script>
+
+<script>
+// ==== Validasi format email pada form contact ====
+
+function validateEmailField() {
+    const emailInput = document.getElementById('senderEmail');
+    const emailError = document.getElementById('emailError');
+    const email = emailInput.value.trim();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (email !== '' && !emailRegex.test(email)) {
+        emailError.classList.remove('hidden');
+        emailInput.classList.add('border-red-500');
+        return false;
+    } else {
+        emailError.classList.add('hidden');
+        emailInput.classList.remove('border-red-500');
+        return true;
+    }
+}
+
+function clearEmailError() {
+    const emailInput = document.getElementById('senderEmail');
+    const emailError = document.getElementById('emailError');
+    emailError.classList.add('hidden');
+    emailInput.classList.remove('border-red-500');
+}
+</script>
+
+<footer class="site-footer py-16">
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+
+            <!-- Kolom 1: Deskripsi -->
+            <div>
+                <h3 class="text-xl font-black mb-4">Giva Violen Pardede</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <span data-lang-inline="id" class="visible">Terima kasih telah mengunjungi situs portofolio pribadi saya. Hubungi saya melalui media sosial.</span>
+                    <span data-lang-inline="en">Thank you for visiting my personal portfolio website. Connect with me over socials.</span>
+                </p>
+                <p class="text-gray-400 text-sm">
+                    <span data-lang-inline="id" class="visible">Terus Maju</span>
+                    <span data-lang-inline="en">Keep Rising</span> 🚀.
+                </p>
+            </div>
+
+            <!-- Kolom 2: Quick Links -->
+            <div>
+                <h3 class="text-lg font-bold mb-6">
+                    <span data-lang-inline="id" class="visible">Tautan Cepat</span>
+                    <span data-lang-inline="en">Quick Links</span>
+                </h3>
+                <div class="space-y-3">
+                    <a href="#home" class="footer-link text-sm flex items-center gap-2">
+                        <i class="fas fa-circle-right icon-quick"></i> 
+                        <span data-lang-inline="id" class="visible">Beranda</span>
+                        <span data-lang-inline="en">Home</span>
+                    </a>
+                    <a href="#about" class="footer-link text-sm flex items-center gap-2">
+                        <i class="fas fa-circle-right icon-quick"></i>
+                        <span data-lang-inline="id" class="visible">Tentang Saya</span>
+                        <span data-lang-inline="en">About</span>
+                    </a>
+                    <a href="#skills" class="footer-link text-sm flex items-center gap-2">
+                        <i class="fas fa-circle-right icon-quick"></i>
+                        <span data-lang-inline="id" class="visible">Keahlian</span>
+                        <span data-lang-inline="en">Skills</span>
+                    </a>
+                    <a href="#projects" class="footer-link text-sm flex items-center gap-2">
+                        <i class="fas fa-circle-right icon-quick"></i>
+                        <span data-lang-inline="id" class="visible">Proyek</span>
+                        <span data-lang-inline="en">Projects</span>
+                    </a>
+                    <a href="#experience" class="footer-link text-sm flex items-center gap-2">
+                        <i class="fas fa-circle-right icon-quick"></i>
+                        <span data-lang-inline="id" class="visible">Pengalaman</span>
+                        <span data-lang-inline="en">Experience</span>
+                    </a>
+                    <a href="#certifications" class="footer-link text-sm flex items-center gap-2">
+                        <i class="fas fa-circle-right icon-quick"></i>
+                        <span data-lang-inline="id" class="visible">Sertifikasi</span>
+                        <span data-lang-inline="en">Certifications</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kolom 3: Contact Info -->
+            <div>
+                <h3 class="text-lg font-bold mb-6">
+                    <span data-lang-inline="id" class="visible">Info Kontak</span>
+                    <span data-lang-inline="en">Contact Info</span>
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3 text-gray-400 text-sm">
+                        <i class="fas fa-phone icon-contact w-4"></i><span>+62 852-6222-9901</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-400 text-sm">
+                        <i class="fas fa-envelope icon-contact w-4"></i><span>givaviolenpardede26@gmail.com</span>
+                    </div>
+                    <div class="flex items-start gap-3 text-gray-400 text-sm">
+                        <i class="fas fa-location-dot icon-contact w-4 mt-1"></i>
+                            <span data-lang-inline="id" class="visible">Laguboti, Toba, Sumatra Utara, Indonesia</span>
+                            <span data-lang-inline="en">Laguboti, Toba, North Sumatra, Indonesia</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex gap-3 mt-6">
+                    <a href="https://www.linkedin.com/in/giva-violen-pardede-400204313/" target="_blank" class="footer-social"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/givaviolen" target="_blank" class="footer-social"><i class="fab fa-github"></i></a>
+                    <a href="mailto:givaviolenpardede26@gmail.com" class="footer-social"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" class="footer-social"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Copyright -->
+        <div style="border-top:1px solid rgba(255,255,255,.04);padding-top:24px;text-align:center;">
+            <p class="text-sm text-gray-500">
+                © <span class="text-cyan-400 font-bold">Giva Violen Pardede</span> . 
+                <span data-lang-inline="id" class="visible">Hak Cipta Dilindungi.</span>
+                <span data-lang-inline="en">All Rights Reserved.</span>
+            </p>
+        </div>
+
+    </div>
+</footer>
+
+<a href="https://wa.me/6285262229901" target="_blank" rel="noopener" title="Chat via WhatsApp" class="wa-bubble">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<button
+    id="mobileScrollTop"
+    class="scroll-top md:hidden"
+    onclick="window.scrollTo({top:0,behavior:'smooth'})">
+
+    <i class="fas fa-chevron-up"></i>
+
+</button>
+
+<script>
+
+/* ── THEME TOGGLE ── */
+let currentTheme = localStorage.getItem('theme') || 'dark';
+
+function applyTheme(mode) {
+    const html = document.documentElement;
+    html.classList.remove('dark','light');
+    html.classList.add(mode);
+    currentTheme = mode;
+    localStorage.setItem('theme', mode);
+
+    const btn = document.getElementById('themeToggle');
+    if (btn) {
+        if (mode === 'dark') {
+            btn.classList.add('dark-active');
+            btn.style.background = '#793FDF';
+        } else {
+            btn.classList.remove('dark-active');
+            btn.style.background = '#7091F5';
+        }
+    }
+}
+
+function toggleTheme() {
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+}
+
+applyTheme(currentTheme);
+
+/* ── LANGUAGE MODAL ── */
+let langModalOpen = false;
+
+function openLangModal() {
+    langModalOpen = !langModalOpen;
+    const modal = document.getElementById('langModal');
+    const chevron = document.getElementById('langChevron');
+    if (langModalOpen) {
+        modal.classList.add('open');
+        chevron.style.transform = 'rotate(180deg)';
+    } else {
+        modal.classList.remove('open');
+        chevron.style.transform = 'rotate(0deg)';
+    }
+}
+
+function closeLangModal() {
+    langModalOpen = false;
+    document.getElementById('langModal').classList.remove('open');
+    document.getElementById('langChevron').style.transform = 'rotate(0deg)';
+}
+
+document.getElementById('langModal').addEventListener('click', function(e) {
+    if (e.target === this) closeLangModal();
+});
+
+/* ── LANGUAGE ── */
+function setLang(lang) {
+    localStorage.setItem('selectedLanguage', lang);
+
+    // Update teks inline
+    document.querySelectorAll('[data-lang-inline]').forEach(el => {
+        el.classList.toggle('visible', el.getAttribute('data-lang-inline') === lang);
+    });
+
+    // UPDATE PLACEHOLDER (Name, Email, Phone, Message)
+    document.querySelectorAll('[data-placeholder-' + lang + ']').forEach(input => {
+        const newPlaceholder = input.getAttribute('data-placeholder-' + lang);
+        input.setAttribute('placeholder', newPlaceholder);
+    });
+
+    // Update modal selections
+    document.getElementById('optId').classList.toggle('selected', lang === 'id');
+    document.getElementById('optEn').classList.toggle('selected', lang === 'en');
+
+    // Update modal texts
+    document.getElementById('langModalTitle').textContent = lang === 'id' ? 'PILIH BAHASA' : 'SELECT LANGUAGE';
+    const configTitle = document.querySelector('.lang-modal-config');
+    if(configTitle) configTitle.textContent = lang === 'id' ? 'KONFIGURASI' : 'CONFIGURATION';
+
+    // Update navbar label
+    document.getElementById('langLabel').textContent = lang === 'id' ? 'Id' : 'En';
+
+    try {
+    renderPagination(currentPage);
+    } catch (e) {}
+
+    document.documentElement.lang = lang;
+    closeLangModal();
+    
+}
+
+const savedLang = localStorage.getItem('selectedLanguage') || 'id';
+setLang(savedLang);
+
+/* ── EMAILJS ── */
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+(function(){
+    if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY' && typeof emailjs !== 'undefined') emailjs.init(EMAILJS_PUBLIC_KEY);
+})();
+
+function showToast(msg, type) {
+    const toast = document.getElementById('toast');
+    toast.innerHTML = msg;
+    toast.className = 'show ' + type;
+    setTimeout(() => { toast.className = ''; }, 4000);
+}
+
+function sendEmail() {
+    // jalankan validasi yang sudah ada dulu
+    const emailValid = validateEmailField();
+    const phoneValid = validatePhoneField();
+    if (!emailValid || !phoneValid) {
+        return;
+    }
+
+    const name = document.getElementById('senderName').value.trim();
+    const email = document.getElementById('senderEmail').value.trim();
+    const phone = document.getElementById('senderPhone').value.trim();
+    const message = document.getElementById('senderMessage').value.trim();
+
+    if (!name || !email || !message) {
+        alert('Mohon lengkapi Nama, Email, dan Pesan.');
+        return;
+    }
+
+    const sendBtn = document.getElementById('sendBtn');
+    const originalBtnHtml = sendBtn.innerHTML;
+    sendBtn.disabled = true;
+    sendBtn.innerHTML = 'Mengirim...';
+
+    emailjs.send('SERVICE_ID_KAMU', 'TEMPLATE_ID_KAMU', {
+        from_name: name,
+        from_email: email,
+        phone: phone || '-',
+        message: message
+    })
+    .then(function() {
+        alert('Pesan berhasil dikirim!');
+        document.getElementById('senderName').value = '';
+        document.getElementById('senderEmail').value = '';
+        document.getElementById('senderPhone').value = '';
+        document.getElementById('senderMessage').value = '';
+    })
+    .catch(function(error) {
+        alert('Gagal mengirim pesan. Coba lagi.');
+        console.error('EmailJS error:', error);
+    })
+    .finally(function() {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = originalBtnHtml;
+    });
+}
+
+/* ── SCROLL & NAVIGATION ── */
+
+// 1. Simpan posisi scroll sebelum refresh
+window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('scrollPosition', window.scrollY);
+});
+
+// 2. Kembalikan posisi scroll saat halaman dimuat
+window.addEventListener('load', () => {
+    const scrollPos = sessionStorage.getItem('scrollPosition');
+    if (scrollPos) {
+        window.scrollTo(0, parseInt(scrollPos));
+    }
+    // Hapus hash (#skills) agar browser tidak memaksa melompat
+    if (window.location.hash) {
+        window.history.replaceState("", document.title, window.location.pathname);
+    }
+});
+
+/* MOBILE MENU */
+function toggleMobileMenu() {
+    const menu = document.getElementById("mobileMenu");
+    const icon = document.querySelector("#menuBtn i");
+    menu.classList.toggle("hidden");
+    if(menu.classList.contains("hidden")){
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
+    }else{
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
+    }
+}
+
+/* ACTIVE NAV LINK ON SCROLL */
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-item");
+
+window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        const sectionHeight = section.offsetHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            current = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+        }
+    });
+
+    // Mobile Scroll Top Button
+    const btnTop = document.getElementById("mobileScrollTop");
+    if (btnTop) {
+        if (window.innerWidth < 768 && window.scrollY > 300) {
+            btnTop.classList.add("show");
+        } else {
+            btnTop.classList.remove("show");
+        }
+    }
+});
+
+/* PAGINATION */
+const CERTS_PER_PAGE = 8;
+const cards = Array.from(document.querySelectorAll('.cert-card'));
+const certCountEl = document.getElementById('certCount');
+if (certCountEl) {
+    certCountEl.textContent = cards.length;
+}
+const pagination = document.getElementById('cert-pagination');
+let currentPage = Number(localStorage.getItem("certCurrentPage")) || 1;
+
+function renderCerts(page) {
+    cards.forEach((card, i) => {
+        const start = (page - 1) * CERTS_PER_PAGE;
+        const end = start + CERTS_PER_PAGE;
+        card.style.display = (i >= start && i < end) ? '' : 'none';
+    });
+}
+
+function renderPagination(page) {
+    if(!pagination) return;
+    const total = Math.ceil(cards.length / CERTS_PER_PAGE);
+    pagination.innerHTML = '';
+
+    const lang = localStorage.getItem('selectedLanguage') || 'id';
+    const prevText = lang === 'id' ? '« Seb' : '« Prev';
+    const nextText = lang === 'id' ? 'Sel »' : 'Next »';
+
+    const prev = document.createElement('button');
+    prev.textContent = prevText;
+    prev.className = `pagination-btn ${page === 1 ? 'disabled' : ''}`;
+    prev.onclick = () => { if(page > 1) goToPage(page - 1); };
+    pagination.appendChild(prev);
+
+    for (let i = 1; i <= total; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.className = `pagination-btn ${i === page ? 'active' : ''}`;
+        btn.onclick = () => goToPage(i);
+        pagination.appendChild(btn);
+    }
+
+    const next = document.createElement('button');
+    next.textContent = nextText;
+    next.className = `pagination-btn ${page === total ? 'disabled' : ''}`;
+    next.onclick = () => { if(page < total) goToPage(page + 1); };
+    pagination.appendChild(next);
+}
+
+function goToPage(page) {
+    currentPage = page;
+
+    // Simpan halaman yang sedang aktif
+    localStorage.setItem("certCurrentPage", page);
+
+    renderCerts(page);
+    renderPagination(page);
+}
+
+function lockCertGridHeight() {
+    const certGrid = document.getElementById('cert-grid');
+    if (!certGrid || cards.length === 0) return;
+
+    // render halaman pertama sementara untuk mengukur tinggi maksimal
+    renderCerts(1);
+    const maxHeight = certGrid.offsetHeight;
+    certGrid.style.minHeight = maxHeight + 'px';
+}
+
+if (cards.length > 0) {
+    lockCertGridHeight();
+    goToPage(currentPage);
+}
+
+document.querySelectorAll('.project-link-demo, .project-link-src').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href || href === '#') {
+        link.classList.add('link-disabled');
+    }
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+    emailjs.init({ publicKey: "7MlvcBQCrCcdIkt6N" }); // ganti dengan Public Key dari EmailJS
+</script>
+
+</body>
+</html>
